@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <form id="speakerForm">
+      <div class="input-container ic1">
+        <label for="speaker" class="placeholder">Puhujan nimi</label>
+        <input type="text" id="speaker" placeholder=" " />
+      </div>
+
+      <div class="input-container ic2">
+        <label for="title" class="placeholder">Puhujan titteli</label>
+        <input type="text" id="title" placeholder=" " />
+      </div>
+
+      <button type="submit">Vaihda nimeä</button>
+    </form>
+
+    <script>
+      const speakerRep = nodecg.Replicant("speakerReplicant");
+      const speaker = document.getElementById("speaker");
+      const titleRep = nodecg.Replicant("titleReplicant");
+      const title = document.getElementById("title");
+      speakerRep.on("change", (newValue, oldValue) => {
+        console.log(`myRep changed from ${oldValue} to ${newValue}`);
+        speaker.value = newValue;
+      });
+      const speakerForm = document.getElementById("speakerForm");
+
+      speakerForm.addEventListener("submit", (e) => {
+        e.preventDefault;
+        speakerRep.value = speaker.value;
+        titleRep.value = title.value;
+      });
+      titleRep.on("change", (newValue, oldValue) => {
+        console.log(`myRep changed from ${oldValue} to ${newValue}`);
+        title.value = newValue;
+      });
+    </script>
+  </body>
+</html>
